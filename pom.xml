@@ -18,7 +18,14 @@
 		<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<name>Hiago de Sousa Patrício</name>
+			<email>hiagodesousa13@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>America/Cuiaba</timezone> <!-- UTC-3 -->
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
