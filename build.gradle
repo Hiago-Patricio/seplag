@@ -1,0 +1,61 @@
+plugins {
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+    id 'maven-publish'
+    id 'io.freefair.lombok' version '8.13.1'
+}
+
+
+group = 'gov.mt.seplag'
+version = '0.0.1-SNAPSHOT'
+description = 'Gestao de Servidores'
+archivesBaseName = 'gestao-servidores'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation libs.org.springframework.boot.spring.boot.starter
+    implementation libs.org.springframework.boot.spring.boot.starter.web
+    implementation libs.org.springframework.boot.spring.boot.starter.data.jpa
+    implementation libs.org.springframework.boot.spring.boot.starter.validation
+
+    implementation libs.dotenv.java
+
+    compileOnly libs.org.projectlombok.lombok
+    annotationProcessor libs.org.projectlombok.lombok
+    testCompileOnly libs.org.projectlombok.lombok
+    testAnnotationProcessor libs.org.projectlombok.lombok
+
+    compileOnly libs.org.mapstruct.mapstruct
+    testCompileOnly libs.org.mapstruct.mapstruct
+    annotationProcessor libs.org.mapstruct.mapstruct.processor
+    testAnnotationProcessor libs.org.mapstruct.mapstruct.processor
+    implementation libs.lombok.mapstruct.binding
+
+    runtimeOnly libs.org.postgresql.postgresql
+    runtimeOnly libs.com.h2database.h2
+
+    testImplementation libs.org.springframework.boot.spring.boot.starter.test
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.annotationProcessorGeneratedSourcesDirectory = file("$buildDir/generated/sources/annotationProcessor/java/main")
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+compileJava {
+    options.compilerArgs += ["-Amapstruct.defaultComponentModel=spring"]
+}

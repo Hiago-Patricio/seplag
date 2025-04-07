@@ -2,12 +2,12 @@ package gov.mt.seplag.gestao_servidores.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@RequiredArgsConstructor
 @Getter
 @Setter
+@ToString
 public class CityDTO {
     private Long id;
 

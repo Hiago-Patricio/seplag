@@ -4,20 +4,18 @@ import gov.mt.seplag.gestao_servidores.dto.CityDTO;
 import gov.mt.seplag.gestao_servidores.entity.City;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CityMapper {
-    CityMapper INSTANCE = Mappers.getMapper(CityMapper.class);
-
-    @Mapping(source = "name", target="name")
-    @Mapping(source = "uf", target="uf")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "uf", source = "uf")
     CityDTO toDTO(City city);
 
-    @Mapping(source = "name", target="name")
-    @Mapping(source = "uf", target="uf")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "uf", source = "uf")
     City toEntity(CityDTO cityDTO);
     List<CityDTO> toDTOList(List<City> cities);
 }
