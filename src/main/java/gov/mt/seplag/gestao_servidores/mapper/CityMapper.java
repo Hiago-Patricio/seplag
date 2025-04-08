@@ -1,6 +1,7 @@
 package gov.mt.seplag.gestao_servidores.mapper;
 
-import gov.mt.seplag.gestao_servidores.dto.CityDTO;
+import gov.mt.seplag.gestao_servidores.dto.city.CityDTO;
+import gov.mt.seplag.gestao_servidores.dto.city.CityPatchDTO;
 import gov.mt.seplag.gestao_servidores.entity.City;
 import org.mapstruct.*;
 
@@ -19,4 +20,7 @@ public interface CityMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDTO(CityDTO cityDTO, @MappingTarget City city);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void patchEntiyFromDTO(CityPatchDTO cityPatchDTO, @MappingTarget City city);
 }

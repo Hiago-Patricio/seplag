@@ -1,6 +1,7 @@
 package gov.mt.seplag.gestao_servidores.service;
 
-import gov.mt.seplag.gestao_servidores.dto.CityDTO;
+import gov.mt.seplag.gestao_servidores.dto.city.CityDTO;
+import gov.mt.seplag.gestao_servidores.dto.city.CityPatchDTO;
 import gov.mt.seplag.gestao_servidores.entity.City;
 import gov.mt.seplag.gestao_servidores.exception.City.CityNotFoundException;
 import gov.mt.seplag.gestao_servidores.mapper.CityMapper;
@@ -49,7 +50,7 @@ public class CityService {
     }
 
     public CityDTO updateCity(Long id, CityDTO cityDTO) {
-        log.info("Updating city with ID: {}", id);
+        log.info("Updating city with ID: {} - {}", id, cityDTO);
 
         City existingCity = repository.findById(id)
                 .orElseThrow(() -> new CityNotFoundException(id));
@@ -58,6 +59,20 @@ public class CityService {
 
         City updatedCity = repository.save(existingCity);
         log.debug("City updated: {}", updatedCity);
+
+        return mapper.toDTO(updatedCity);
+    }
+
+    public CityDTO patchCity(Long id, CityPatchDTO cityPatchDTO) {
+        log.info("Patching city with ID: {} - {}", id, cityPatchDTO);
+
+        City existingCity = repository.findById(id)
+                .orElseThrow(() -> new CityNotFoundException(id));
+
+        mapper.patchEntiyFromDTO(cityPatchDTO, existingCity);
+
+        City updatedCity = repository.save(existingCity);
+        log.debug("City patched: {}", updatedCity);
 
         return mapper.toDTO(updatedCity);
     }

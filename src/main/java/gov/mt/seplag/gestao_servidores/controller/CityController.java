@@ -1,6 +1,7 @@
 package gov.mt.seplag.gestao_servidores.controller;
 
-import gov.mt.seplag.gestao_servidores.dto.CityDTO;
+import gov.mt.seplag.gestao_servidores.dto.city.CityDTO;
+import gov.mt.seplag.gestao_servidores.dto.city.CityPatchDTO;
 import gov.mt.seplag.gestao_servidores.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,12 @@ public class CityController {
     @PutMapping("/{id}")
     public ResponseEntity<CityDTO> updateCity(@PathVariable Long id, @Valid @RequestBody CityDTO cityDTO) {
         CityDTO updatedCity = cityService.updateCity(id, cityDTO);
+        return ResponseEntity.ok(updatedCity);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CityDTO> patchCity(@PathVariable Long id, @Valid @RequestBody CityPatchDTO city) {
+        CityDTO updatedCity = cityService.patchCity(id, city);
         return ResponseEntity.ok(updatedCity);
     }
 

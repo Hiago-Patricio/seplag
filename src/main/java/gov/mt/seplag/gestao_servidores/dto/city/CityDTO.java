@@ -1,4 +1,4 @@
-package gov.mt.seplag.gestao_servidores.dto;
+package gov.mt.seplag.gestao_servidores.dto.city;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
