@@ -3,7 +3,7 @@ package gov.mt.seplag.gestao_servidores.service;
 import gov.mt.seplag.gestao_servidores.dto.city.CityDTO;
 import gov.mt.seplag.gestao_servidores.dto.city.CityPatchDTO;
 import gov.mt.seplag.gestao_servidores.entity.City;
-import gov.mt.seplag.gestao_servidores.exception.City.CityNotFoundException;
+import gov.mt.seplag.gestao_servidores.exception.city.CityNotFoundException;
 import gov.mt.seplag.gestao_servidores.mapper.CityMapper;
 import gov.mt.seplag.gestao_servidores.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
