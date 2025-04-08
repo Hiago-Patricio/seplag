@@ -28,6 +28,7 @@ services:
     command: server /data --console-address ":${MINIO_CONSOLE_PORT}"
 
   app:
+    image: springboot-app
     build:
       context: .
       dockerfile: Dockerfile
