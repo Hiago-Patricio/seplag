@@ -48,6 +48,20 @@ public class CityService {
         return mapper.toDTO(savedCity);
     }
 
+    public CityDTO updateCity(Long id, CityDTO cityDTO) {
+        log.info("Updating city with ID: {}", id);
+
+        City existingCity = repository.findById(id)
+                .orElseThrow(() -> new CityNotFoundException(id));
+
+        mapper.updateEntityFromDTO(cityDTO, existingCity);
+
+        City updatedCity = repository.save(existingCity);
+        log.debug("City updated: {}", updatedCity);
+
+        return mapper.toDTO(updatedCity);
+    }
+
     public void deleteCity(Long id) {
         log.info("Deleting city with ID: {}", id);
         if (repository.existsById(id)) {

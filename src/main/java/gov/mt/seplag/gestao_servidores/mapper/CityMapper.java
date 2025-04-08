@@ -2,9 +2,7 @@ package gov.mt.seplag.gestao_servidores.mapper;
 
 import gov.mt.seplag.gestao_servidores.dto.CityDTO;
 import gov.mt.seplag.gestao_servidores.entity.City;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -18,4 +16,7 @@ public interface CityMapper {
     @Mapping(target = "uf", source = "uf")
     City toEntity(CityDTO cityDTO);
     List<CityDTO> toDTOList(List<City> cities);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntityFromDTO(CityDTO cityDTO, @MappingTarget City city);
 }
