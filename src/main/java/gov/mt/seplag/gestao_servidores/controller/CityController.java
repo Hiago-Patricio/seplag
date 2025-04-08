@@ -22,9 +22,9 @@ public class CityController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CityDTO> getCityById(@PathVariable Long id) {
-        return cityService.findCityById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        CityDTO city = cityService.findCityById(id);
+
+        return ResponseEntity.ok(city);
     }
 
     @PostMapping
