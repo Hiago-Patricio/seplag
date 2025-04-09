@@ -5,6 +5,9 @@
 # Spring Boot
 spring-boot = "3.4.4"
 
+# Swagger
+springdoc-openapi = "2.8.5"
+
 # Banco de Dados
 postgresql = "42.7.5"
 h2 = "2.3.232"
@@ -28,6 +31,9 @@ spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation", version.ref = "spring-boot" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security", version.ref = "spring-boot" }
+
+# Swagger
+springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-openapi" }
 
 # Banco de Dados
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }

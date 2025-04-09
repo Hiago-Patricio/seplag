@@ -3,6 +3,7 @@ package gov.mt.seplag.gestao_servidores.controller;
 import gov.mt.seplag.gestao_servidores.dto.city.CityDTO;
 import gov.mt.seplag.gestao_servidores.dto.city.CityPatchDTO;
 import gov.mt.seplag.gestao_servidores.service.CityService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/cities")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class CityController {
     private final CityService cityService;
 

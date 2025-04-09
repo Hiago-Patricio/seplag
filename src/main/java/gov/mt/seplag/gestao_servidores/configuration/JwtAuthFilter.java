@@ -1,5 +1,6 @@
 package gov.mt.seplag.gestao_servidores.configuration;
 
+import gov.mt.seplag.gestao_servidores.exception.auth.TokenNotFoundException;
 import gov.mt.seplag.gestao_servidores.service.JwtService;
 import gov.mt.seplag.gestao_servidores.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
@@ -33,7 +34,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
 
         // Permite requisições públicas sem autenticação
-        if (path.startsWith("/api/auth/login") || path.startsWith("/api/auth/refresh")) {
+        if (path.startsWith("/api/auth")
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-ui")
+                || path.equals("/swagger-ui.html")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -42,8 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             log.warn("Missing or invalid Authorization header");
-            filterChain.doFilter(request, response);
-            return;
+            throw new TokenNotFoundException();
         }
 
         final String token = jwtService.extractTokenFromHeader(authHeader);

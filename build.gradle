@@ -30,6 +30,9 @@ dependencies {
     implementation(libs.spring.boot.starter.validation)
     implementation(libs.spring.boot.starter.security)
 
+    // Swagger
+    implementation(libs.springdoc.openapi.ui)
+
     // Utilitários
     implementation(libs.dotenv)
 

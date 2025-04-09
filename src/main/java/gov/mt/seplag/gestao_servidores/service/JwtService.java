@@ -72,7 +72,7 @@ public class JwtService {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
         }
-        throw new IllegalArgumentException("Token invalid or absent in header Authorization");
+        throw new IllegalArgumentException("Invalid or missing token in header Authorization");
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
