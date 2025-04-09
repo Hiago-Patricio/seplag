@@ -3,6 +3,7 @@ package gov.mt.seplag.gestao_servidores.controller;
 import gov.mt.seplag.gestao_servidores.dto.auth.*;
 import gov.mt.seplag.gestao_servidores.service.AuthService;
 import gov.mt.seplag.gestao_servidores.service.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,8 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refreshToken(@RequestHeader("Authorization") String oldToken) {
+    public ResponseEntity<AuthResponse> refreshToken(HttpServletRequest request) {
+        String oldToken = request.getHeader("Authorization");
         String token = jwtService.extractTokenFromHeader(oldToken);
         return ResponseEntity.ok(authService.refreshToken(token));
     }

@@ -67,6 +67,11 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, "Required request header is missing.");
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleMissingRequestHeader(IllegalArgumentException ex) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGenericException(Exception ex) {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");

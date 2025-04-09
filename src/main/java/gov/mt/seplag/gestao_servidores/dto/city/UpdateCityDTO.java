@@ -7,10 +7,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class CityDTO {
-
-    @Schema(description = "City identifier", example = "1")
-    private Long id;
+public class UpdateCityDTO {
 
     @NotBlank(message = "name is required")
     @Schema(description = "City name", example = "Cuiabá")
