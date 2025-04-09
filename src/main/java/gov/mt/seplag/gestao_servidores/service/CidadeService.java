@@ -46,11 +46,19 @@ public class CidadeService {
         }
     }
 
-    public CidadeResponseDTO createCidade(CidadeRequestDTO cidade) {
-        log.info("Criando cidade: {}", cidade);
-        Cidade savedCidade = repository.save(mapper.toEntity(cidade));
-        log.debug("Cidade criada com ID: {}", savedCidade.getId());
-        return mapper.toCidadeDTO(savedCidade);
+    public CidadeResponseDTO createCidade(CidadeRequestDTO dto) {
+        log.info("Criando cidade: {}", dto);
+
+        Optional<Cidade> cidade = repository.findByNomeAndUf(dto.getNome(), dto.getUf());
+
+        if (cidade.isPresent()) {
+            log.debug("Cidade já existe com ID: {}", cidade.get().getId());
+            return mapper.toCidadeDTO(cidade.get());
+        } else {
+            Cidade savedCidade = repository.save(mapper.toEntity(dto));
+            log.debug("Cidade criada com ID: {}", savedCidade.getId());
+            return mapper.toCidadeDTO(savedCidade);
+        }
     }
 
     public CidadeResponseDTO updateCidade(Long id, CidadeRequestDTO cidadeDTO) {

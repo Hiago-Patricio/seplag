@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "pessoa")
 @Data
-@ToString
+@ToString(exclude = { "fotosPessoa", "enderecos", "servidoresTemporarios", "servidoresEfetivos", "lotacoes" })
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

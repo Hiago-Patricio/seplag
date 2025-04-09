@@ -1,7 +1,10 @@
 package gov.mt.seplag.gestao_servidores.dto.unidade;
 
-import lombok.Data;
+import gov.mt.seplag.gestao_servidores.dto.endereco.EnderecoResponseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class UnidadeResponseDTO {
@@ -14,4 +17,6 @@ public class UnidadeResponseDTO {
 
     @Schema(example = "SEDUC", description = "Sigla da unidade")
     private String uf;
+
+    private List<EnderecoResponseDTO> enderecos;
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "cidade")
 @Data
-@ToString
+@ToString(exclude = { "enderecos" })
 public class Cidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

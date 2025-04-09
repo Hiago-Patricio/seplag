@@ -18,5 +18,9 @@ public interface EnderecoMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "cidade", source = "cidade")
+    Endereco toEnderecoEntity(EnderecoResponseDTO enderecoDTO);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "cidade", source = "cidade")
     void updateEnderecoFromDTO(EnderecoRequestDTO enderecoDTO, @MappingTarget Endereco endereco, Cidade cidade);
 }

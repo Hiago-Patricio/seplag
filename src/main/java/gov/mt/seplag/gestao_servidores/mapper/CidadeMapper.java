@@ -10,6 +10,7 @@ public interface CidadeMapper {
     CidadeResponseDTO toCidadeDTO(Cidade cidade);
 
     Cidade toEntity(CidadeRequestDTO cidadeDTO);
+    Cidade toEntity(CidadeResponseDTO cidadeDTO);
 
     void updateEntityFromDTO(CidadeRequestDTO updateCidadeDTO, @MappingTarget Cidade cidade);
 }

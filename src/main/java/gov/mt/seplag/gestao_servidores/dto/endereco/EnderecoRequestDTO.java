@@ -1,5 +1,6 @@
 package gov.mt.seplag.gestao_servidores.dto.endereco;
 
+import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeRequestDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -26,6 +27,6 @@ public class EnderecoRequestDTO {
     private String bairro;
 
     @NotNull(message = "Cidade é obrigatória")
-    @Schema(example = "1", description = "ID da cidade relacionada ao endereço")
-    private Long cidadeId;
+    @Schema(description = "Cidade relacionada ao endereço")
+    private CidadeRequestDTO cidade;
 }

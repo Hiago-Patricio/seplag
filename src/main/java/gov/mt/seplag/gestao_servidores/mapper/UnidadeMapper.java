@@ -14,5 +14,7 @@ public interface UnidadeMapper {
     Unidade toUnidadeEntity(UnidadeRequestDTO unidadeRequestDTO);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target= "lotacoes", ignore = true)
+    @Mapping(target= "enderecos", ignore = true)
     void updateUnidadeFromDTO(UnidadeRequestDTO unidadeRequestDTO, @MappingTarget Unidade unidade);
 }
