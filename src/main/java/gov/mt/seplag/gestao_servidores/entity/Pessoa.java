@@ -1,10 +1,12 @@
 package gov.mt.seplag.gestao_servidores.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "pessoa")
@@ -30,4 +32,8 @@ public class Pessoa {
 
     @Column(name = "pes_pai", nullable = false, length = 200)
     private String pai;
+
+    @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
+    private List<FotoPessoa> fotosPessoa;
 }
