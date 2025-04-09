@@ -59,9 +59,11 @@ git clone https://github.com/hiago-patricio/seplag.git
 
 cd seplag
 
-./gradlew clean build --no-build-cache
-
+# dev (enable debug)
 docker-compose up --build
+
+# prod
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 2. Acesse http://localhost:8080/swagger-ui.html
