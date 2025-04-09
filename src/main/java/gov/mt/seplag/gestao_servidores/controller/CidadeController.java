@@ -1,8 +1,7 @@
 package gov.mt.seplag.gestao_servidores.controller;
 
-import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeDTO;
-import gov.mt.seplag.gestao_servidores.dto.cidade.CreateCidadeDTO;
-import gov.mt.seplag.gestao_servidores.dto.cidade.UpdateCidadeDTO;
+import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeResponseDTO;
+import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeRequestDTO;
 import gov.mt.seplag.gestao_servidores.service.CidadeService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -24,7 +23,7 @@ public class CidadeController {
     private final CidadeService cidadeService;
 
     @GetMapping
-    public ResponseEntity<List<CidadeDTO>> getAllCidades(
+    public ResponseEntity<List<CidadeResponseDTO>> getAllCidades(
             @ParameterObject
             @Parameter(
                     description = "Parameters of pagination",
@@ -33,25 +32,25 @@ public class CidadeController {
                     }
             )
             Pageable pageable) {
-        Page<CidadeDTO> cidades = cidadeService.findAll(pageable);
+        Page<CidadeResponseDTO> cidades = cidadeService.findAll(pageable);
         return ResponseEntity.ok(cidades.getContent());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CidadeDTO> getCidadeById(@PathVariable Long id) {
-        CidadeDTO cidade = cidadeService.findCidadeById(id);
+    public ResponseEntity<CidadeResponseDTO> getCidadeById(@PathVariable Long id) {
+        CidadeResponseDTO cidade = cidadeService.findCidadeById(id);
 
         return ResponseEntity.ok(cidade);
     }
 
     @PostMapping
-    public CidadeDTO createCidade(@Valid @RequestBody CreateCidadeDTO cidade) {
+    public CidadeResponseDTO createCidade(@Valid @RequestBody CidadeRequestDTO cidade) {
         return cidadeService.createCidade(cidade);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CidadeDTO> updateCidade(@PathVariable Long id, @Valid @RequestBody UpdateCidadeDTO cidade) {
-        CidadeDTO updatedCidade = cidadeService.updateCidade(id, cidade);
+    public ResponseEntity<CidadeResponseDTO> updateCidade(@PathVariable Long id, @Valid @RequestBody CidadeRequestDTO cidade) {
+        CidadeResponseDTO updatedCidade = cidadeService.updateCidade(id, cidade);
         return ResponseEntity.ok(updatedCidade);
     }
 

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class UpdateCidadeDTO {
+public class CidadeRequestDTO {
 
     @NotBlank(message = "name is required")
     @Schema(example = "Cuiabá")

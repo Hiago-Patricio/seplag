@@ -1,8 +1,7 @@
 package gov.mt.seplag.gestao_servidores.service;
 
-import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeDTO;
-import gov.mt.seplag.gestao_servidores.dto.cidade.CreateCidadeDTO;
-import gov.mt.seplag.gestao_servidores.dto.cidade.UpdateCidadeDTO;
+import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeResponseDTO;
+import gov.mt.seplag.gestao_servidores.dto.cidade.CidadeRequestDTO;
 import gov.mt.seplag.gestao_servidores.entity.Cidade;
 import gov.mt.seplag.gestao_servidores.exception.cidade.CidadeNotFoundException;
 import gov.mt.seplag.gestao_servidores.mapper.CidadeMapper;
@@ -23,38 +22,38 @@ public class CidadeService {
     private final CidadeRepository repository;
     private final CidadeMapper mapper;
 
-    public Page<CidadeDTO> findAll(Pageable pageable) {
+    public Page<CidadeResponseDTO> findAll(Pageable pageable) {
         log.info("Buscando todas as cidades.");
 
         Page<Cidade> page = repository.findAll(pageable);
-        Page<CidadeDTO> dtoPage = page.map(mapper::toCidadeDTO);
+        Page<CidadeResponseDTO> dtoPage = page.map(mapper::toCidadeDTO);
 
         log.debug("{} cidades localizadas.", page.getTotalElements());
         return dtoPage;
     }
 
-    public CidadeDTO findCidadeById(Long id) {
+    public CidadeResponseDTO findCidadeById(Long id) {
         log.info("Buscando cidade com ID: {}", id);
         Optional<Cidade> cidadeOpt = repository.findById(id);
 
         if (cidadeOpt.isPresent()) {
-            CidadeDTO cidadeDTO = mapper.toCidadeDTO(cidadeOpt.get());
-            log.debug("Cidade encontrada: {}", cidadeDTO);
-            return cidadeDTO;
+            CidadeResponseDTO cidadeResponseDTO = mapper.toCidadeDTO(cidadeOpt.get());
+            log.debug("Cidade encontrada: {}", cidadeResponseDTO);
+            return cidadeResponseDTO;
         } else {
             log.warn("Cidade com ID {} não encontrada.", id);
             throw new CidadeNotFoundException(id);
         }
     }
 
-    public CidadeDTO createCidade(CreateCidadeDTO cidade) {
+    public CidadeResponseDTO createCidade(CidadeRequestDTO cidade) {
         log.info("Criando cidade: {}", cidade);
         Cidade savedCidade = repository.save(mapper.toEntity(cidade));
         log.debug("Cidade criada com ID: {}", savedCidade.getId());
         return mapper.toCidadeDTO(savedCidade);
     }
 
-    public CidadeDTO updateCidade(Long id, UpdateCidadeDTO cidadeDTO) {
+    public CidadeResponseDTO updateCidade(Long id, CidadeRequestDTO cidadeDTO) {
         log.info("Atualizando cidade com ID: {} - {}", id, cidadeDTO);
 
         Cidade existingCidade = repository.findById(id)

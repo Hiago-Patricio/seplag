@@ -7,16 +7,14 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class CidadeDTO {
+public class CidadeResponseDTO {
 
     @Schema(example = "1")
     private Long id;
 
-    @NotBlank(message = "name is required")
     @Schema(example = "Cuiabá")
     private String nome;
 
-    @NotBlank(message = "uf is required")
     @Schema(example = "MT")
     private String uf;
 }
