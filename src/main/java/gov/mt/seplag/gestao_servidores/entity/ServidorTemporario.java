@@ -12,13 +12,17 @@ import java.util.Date;
 @ToString
 public class ServidorTemporario {
     @Id
+    @Column(name = "pes_id")
+    private Long pessoaId;
+
     @ManyToOne(optional = false)
-    @JoinColumn(name = "pes_id", nullable = false)
+    @MapsId("pessoaId")
+    @JoinColumn(name = "pes_id", foreignKey = @ForeignKey(name = "fk_servidor_temporario_pessoa"), nullable = false)
     private Pessoa pessoa;
 
     @Column(name = "st_data_admissao", nullable = false)
     private Date dataAdmissao;
 
-    @Column(name = "st_data_demissao", nullable = true)
+    @Column(name = "st_data_demissao")
     private Date dataDemissao;
 }

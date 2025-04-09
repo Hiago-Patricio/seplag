@@ -4,16 +4,18 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "servidor_temporario")
+@Table(name = "servidor_efetivo")
 @Data
 @ToString
 public class ServidorEfetivo {
     @Id
+    @Column(name = "pes_id")
+    private Long pessoaId;
+
     @ManyToOne(optional = false)
-    @JoinColumn(name = "pes_id", nullable = false)
+    @MapsId("pessoaId")
+    @JoinColumn(name = "pes_id", foreignKey = @ForeignKey(name = "fk_servidor_efetivo_pessoa"), nullable = false)
     private Pessoa pessoa;
 
     @Column(name = "se_matricula", length = 20)
