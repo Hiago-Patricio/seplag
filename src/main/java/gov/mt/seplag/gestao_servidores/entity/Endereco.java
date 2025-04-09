@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "endereco")
 @Data
@@ -29,4 +31,10 @@ public class Endereco {
     @ManyToOne(optional = false)
     @JoinColumn(name = "cid_id", nullable = false)
     private Cidade cidade;
+
+    @ManyToMany(mappedBy = "enderecos")
+    private List<Pessoa> pessoas;
+
+    @ManyToMany(mappedBy = "enderecos")
+    private List<Unidade> unidades;
 }

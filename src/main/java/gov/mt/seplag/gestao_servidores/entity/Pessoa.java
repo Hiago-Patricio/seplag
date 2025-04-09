@@ -36,4 +36,24 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa")
     @JsonIgnore
     private List<FotoPessoa> fotosPessoa;
+
+    @ManyToMany
+    @JoinTable(
+            name = "pessoa_endereco",
+            joinColumns = @JoinColumn(name = "pes_id"),
+            inverseJoinColumns = @JoinColumn(name = "end_id")
+    )
+    private List<Endereco> enderecos;
+
+    @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
+    private List<ServidorTemporario> servidoresTemporarios;
+
+    @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
+    private List<ServidorEfetivo> servidoresEfetivos;
+
+    @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
+    private List<Lotacao> lotacoes;
 }
