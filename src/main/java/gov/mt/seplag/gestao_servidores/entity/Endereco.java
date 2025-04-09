@@ -31,10 +31,4 @@ public class Endereco {
     @ManyToOne(optional = false)
     @JoinColumn(name = "cid_id", nullable = false)
     private Cidade cidade;
-
-    @ManyToMany(mappedBy = "enderecos")
-    private List<Pessoa> pessoas;
-
-    @ManyToMany(mappedBy = "enderecos")
-    private List<Unidade> unidades;
 }

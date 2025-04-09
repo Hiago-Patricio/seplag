@@ -37,7 +37,7 @@ public class Pessoa {
     @JsonIgnore
     private List<FotoPessoa> fotosPessoa;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "pessoa_endereco",
             joinColumns = @JoinColumn(name = "pes_id"),

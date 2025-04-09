@@ -24,10 +24,8 @@ import java.util.Optional;
 public class EnderecoService {
 
     private final EnderecoRepository enderecoRepository;
-    private final CidadeRepository cidadeRepository;
     private final EnderecoMapper enderecoMapper;
     private final CidadeService cidadeService;
-    private final CidadeMapper cidadeMapper;
 
     public Page<EnderecoResponseDTO> findAll(Pageable pageable) {
         log.info("Buscando todos os endereços.");
@@ -38,14 +36,13 @@ public class EnderecoService {
         return dtoPage;
     }
 
-    public EnderecoResponseDTO findEnderecoById(Long id) {
+    public Endereco findEnderecoById(Long id) {
         log.info("Buscando endereço com ID: {}", id);
         Optional<Endereco> enderecoOpt = enderecoRepository.findById(id);
 
         if (enderecoOpt.isPresent()) {
-            EnderecoResponseDTO enderecoDTO = enderecoMapper.toEnderecoResponseDTO(enderecoOpt.get());
-            log.debug("Endereço encontrado: {}", enderecoDTO);
-            return enderecoDTO;
+            log.debug("Endereço encontrado: {}", enderecoOpt.get());
+            return enderecoOpt.get();
         } else {
             log.warn("Endereço com ID {} não encontrado.", id);
             throw new EnderecoNotFoundException(id);
@@ -55,7 +52,7 @@ public class EnderecoService {
     public Endereco createEndereco(EnderecoRequestDTO enderecoRequestDTO) {
         log.info("Criando endereço: {}", enderecoRequestDTO);
 
-        Cidade cidade = cidadeMapper.toEntity(cidadeService.createCidade(enderecoRequestDTO.getCidade()));
+        Cidade cidade = cidadeService.createCidade(enderecoRequestDTO.getCidade());
 
         // Converte o DTO para a entidade Endereco
         Endereco endereco = enderecoMapper.toEnderecoEntity(enderecoRequestDTO, cidade);
@@ -65,20 +62,11 @@ public class EnderecoService {
         return savedEndereco;
     }
 
-    public Endereco updateEndereco(Long id, EnderecoRequestDTO enderecoRequestDTO) {
-        log.info("Atualizando endereço com ID: {} - {}", id, enderecoRequestDTO);
+    public Endereco updateEndereco(Long id, Endereco endereco) {
+        log.info("Atualizando endereço com ID: {} - {}", id, endereco);
 
-        // Busca o endereço existente
         Endereco existingEndereco = enderecoRepository.findById(id)
                 .orElseThrow(() -> new EnderecoNotFoundException(id));
-
-        CidadeResponseDTO cidadeDTO = cidadeService.createCidade(enderecoRequestDTO.getCidade());
-        Cidade cidade = cidadeRepository.findById(cidadeDTO.getId())
-                .orElseThrow(() -> new RuntimeException("Cidade não encontrada após criação"));
-
-
-        // Atualiza os dados do endereço com os valores do DTO
-        enderecoMapper.updateEnderecoFromDTO(enderecoRequestDTO, existingEndereco, cidade);
 
         Endereco updatedEndereco = enderecoRepository.save(existingEndereco);
         log.debug("Endereço atualizado: {}", updatedEndereco);

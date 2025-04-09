@@ -1,6 +1,7 @@
 package gov.mt.seplag.gestao_servidores.dto.unidade;
 
 import gov.mt.seplag.gestao_servidores.dto.endereco.EnderecoRequestDTO;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -20,5 +21,6 @@ public class UnidadeRequestDTO {
     @Schema(example = "SEDUC", description = "Sigla da unidade")
     private String uf;
 
+    @NotEmpty(message = "O endereço é obrigatório")
     private List<EnderecoRequestDTO> enderecos;
 }

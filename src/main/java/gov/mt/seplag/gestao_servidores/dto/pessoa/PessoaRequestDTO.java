@@ -1,12 +1,17 @@
 package gov.mt.seplag.gestao_servidores.dto.pessoa;
 
+import gov.mt.seplag.gestao_servidores.dto.endereco.EnderecoRequestDTO;
+import gov.mt.seplag.gestao_servidores.dto.foto_pessoa.FotoPessoaRequestDTO;
+import gov.mt.seplag.gestao_servidores.entity.FotoPessoa;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class PessoaRequestDTO {
@@ -31,4 +36,9 @@ public class PessoaRequestDTO {
     @NotBlank(message = "O nome do pai é obrigatório")
     @Schema(example = "José Silva", description = "Nome do pai da pessoa")
     private String pai;
+
+    // TODO private List<FotoPessoaRequestDTO> fotos;
+
+    @NotEmpty(message = "O endereço é obrigatório")
+    private List<EnderecoRequestDTO> enderecos;
 }

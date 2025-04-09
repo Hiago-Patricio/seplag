@@ -23,11 +23,11 @@ public class Unidade {
     @Column(name = "unid_sigla", nullable = false, length = 20)
     private String uf;
 
-    @OneToMany(mappedBy = "unidade")
+    @OneToMany(mappedBy = "unidade", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Lotacao> lotacoes;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "unidade_endereco",
             joinColumns = @JoinColumn(name = "unid_id"),

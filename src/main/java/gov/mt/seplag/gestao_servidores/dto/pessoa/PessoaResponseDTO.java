@@ -1,9 +1,11 @@
 package gov.mt.seplag.gestao_servidores.dto.pessoa;
 
+import gov.mt.seplag.gestao_servidores.dto.endereco.EnderecoResponseDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class PessoaResponseDTO {
@@ -25,4 +27,6 @@ public class PessoaResponseDTO {
 
     @Schema(example = "José Silva", description = "Nome do pai da pessoa")
     private String pai;
+
+    private List<EnderecoResponseDTO> enderecos;
 }

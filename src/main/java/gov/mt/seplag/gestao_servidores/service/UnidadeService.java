@@ -78,9 +78,9 @@ public class UnidadeService {
                 .orElseThrow(() -> new UnidadeNotFoundException(id));
 
         List<Endereco> enderecos = new ArrayList<>();
-        for (EnderecoRequestDTO enderecoDTO : unidadeRequestDTO.getEnderecos()) {
-            Endereco endereco = enderecoService.updateEndereco(id, enderecoDTO);
-            enderecos.add(endereco);
+        for (Endereco endereco : existingUnidade.getEnderecos()) {
+            Endereco existingEndereco = enderecoService.updateEndereco(endereco.getId(), endereco);
+            enderecos.add(existingEndereco);
         }
         existingUnidade.setEnderecos(enderecos);
 
