@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/lotacoes")
 @RequiredArgsConstructor
@@ -23,10 +25,10 @@ public class LotacaoController {
     private final LotacaoService lotacaoService;
 
     @GetMapping
-    public ResponseEntity<Page<LotacaoResponseDTO>> getAllLotacoes(
+    public ResponseEntity<List<LotacaoResponseDTO>> getAllLotacoes(
             @ParameterObject @Parameter(description = "Parâmetros de paginação") Pageable pageable) {
         Page<LotacaoResponseDTO> lotacoes = lotacaoService.findAll(pageable);
-        return ResponseEntity.ok(lotacoes);
+        return ResponseEntity.ok(lotacoes.getContent());
     }
 
     @GetMapping("/{id}")

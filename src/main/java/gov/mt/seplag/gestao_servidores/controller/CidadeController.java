@@ -26,9 +26,9 @@ public class CidadeController {
     public ResponseEntity<List<CidadeResponseDTO>> getAllCidades(
             @ParameterObject
             @Parameter(
-                    description = "Parameters of pagination",
+                    description = "Parâmetros de paginação",
                     examples = {
-                            @io.swagger.v3.oas.annotations.media.ExampleObject(name = "Pagination example", value= "page=0&size=10&sort=name,asc")
+                            @io.swagger.v3.oas.annotations.media.ExampleObject(name = "Exemplo de paginação", value= "page=0&size=10&sort=name,asc")
                     }
             )
             Pageable pageable) {
