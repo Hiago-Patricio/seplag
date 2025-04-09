@@ -1,6 +1,5 @@
 package gov.mt.seplag.gestao_servidores.exception.user;
 
-import gov.mt.seplag.gestao_servidores.entity.City;
 import gov.mt.seplag.gestao_servidores.entity.User;
 import gov.mt.seplag.gestao_servidores.exception.ResourceNotFoundException;
 
