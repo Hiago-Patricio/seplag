@@ -17,10 +17,10 @@ public class Cidade {
     @Column(name = "cid_id")
     private Long id;
 
-    @Column(name = "cid_nome", nullable = false)
+    @Column(name = "cid_nome", nullable = false, length = 200)
     private String nome;
 
-    @Column(name = "cid_uf", nullable = false)
+    @Column(name = "cid_uf", nullable = false, length = 2)
     private String uf;
 
     @OneToMany(mappedBy = "cidade")
