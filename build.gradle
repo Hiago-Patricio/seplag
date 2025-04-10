@@ -36,6 +36,9 @@ dependencies {
     // Utilitários
     implementation(libs.dotenv)
 
+    // MinIO
+    implementation libs.minio
+
     // Lombok
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)

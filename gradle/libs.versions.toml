@@ -12,6 +12,9 @@ springdoc-openapi = "2.8.5"
 postgresql = "42.7.5"
 h2 = "2.3.232"
 
+# MinIO
+minio = "8.5.1"
+
 # MapStruct & Lombok
 mapstruct = "1.6.2"
 lombok = "1.18.30"
@@ -38,6 +41,9 @@ springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmv
 # Banco de Dados
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 h2 = { module = "com.h2database:h2", version.ref = "h2" }
+
+# MinIO
+minio = { module = "io.minio:minio", version.ref = "minio" }
 
 # MapStruct & Lombok
 mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
