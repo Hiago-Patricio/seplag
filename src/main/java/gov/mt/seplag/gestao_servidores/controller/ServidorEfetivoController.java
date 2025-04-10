@@ -1,18 +1,18 @@
 package gov.mt.seplag.gestao_servidores.controller;
 
+import gov.mt.seplag.gestao_servidores.dto.servidor_efetivo.ServidorEfeitivoByUnidadeResponseDTO;
 import gov.mt.seplag.gestao_servidores.dto.servidor_efetivo.ServidorEfetivoRequestDTO;
 import gov.mt.seplag.gestao_servidores.dto.servidor_efetivo.ServidorEfetivoResponseDTO;
 import gov.mt.seplag.gestao_servidores.service.ServidorEfetivoService;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -35,6 +35,15 @@ public class ServidorEfetivoController {
     public ResponseEntity<ServidorEfetivoResponseDTO> getServidorEfetivoById(@PathVariable Long id) {
         ServidorEfetivoResponseDTO servidorEfetivo = servidorEfetivoService.findById(id);
         return ResponseEntity.ok(servidorEfetivo);
+    }
+
+    @GetMapping("/unidade/{id}")
+    public ResponseEntity<List<ServidorEfeitivoByUnidadeResponseDTO>> getServidorEfetivoByUnidadeId(
+        @PathVariable Long id,
+        @ParameterObject @Parameter(description = "Parâmetros de paginação") Pageable pageable)
+    {
+        List<ServidorEfeitivoByUnidadeResponseDTO> servidoresEfetivos = servidorEfetivoService.findByUnidadeId(id, pageable);
+        return ResponseEntity.ok(servidoresEfetivos);
     }
 
     @PostMapping

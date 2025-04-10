@@ -25,9 +25,9 @@ public class LotacaoRequestDTO {
 
     @NotNull(message = "A pessoa associada à lotação é obrigatória")
     @Schema(description = "Pessoa associada à lotação")
-    private Pessoa pessoa;
+    private Long pessoaId;
 
     @NotNull(message = "A unidade associada à lotação é obrigatória")
     @Schema(description = "Unidade associada à lotação")
-    private Unidade unidade;
+    private Long unidadeId;
 }

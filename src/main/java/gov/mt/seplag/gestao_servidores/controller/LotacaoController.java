@@ -1,5 +1,6 @@
 package gov.mt.seplag.gestao_servidores.controller;
 
+import gov.mt.seplag.gestao_servidores.dto.endereco.EnderecoResponseDTO;
 import gov.mt.seplag.gestao_servidores.dto.lotacao.LotacaoRequestDTO;
 import gov.mt.seplag.gestao_servidores.dto.lotacao.LotacaoResponseDTO;
 import gov.mt.seplag.gestao_servidores.service.LotacaoService;
@@ -36,6 +37,15 @@ public class LotacaoController {
         LotacaoResponseDTO lotacao = lotacaoService.findById(id);
         return ResponseEntity.ok(lotacao);
     }
+
+    @GetMapping("/buscar-por-nome-servidor")
+    public ResponseEntity<List<EnderecoResponseDTO>> getLotacaoByServidorEfetivoNome(
+            @RequestParam("servidor-efetivo") String servidorEfetivoNome,
+            @ParameterObject @Parameter(description = "Parâmetros de paginação") Pageable pageable) {
+        List<EnderecoResponseDTO> lotacoes = lotacaoService.findByServidorEfetivoNome(servidorEfetivoNome, pageable);
+        return ResponseEntity.ok(lotacoes);
+    }
+
 
     @PostMapping
     public ResponseEntity<LotacaoResponseDTO> createLotacao(@Valid @RequestBody LotacaoRequestDTO requestDTO) {

@@ -12,6 +12,7 @@ import gov.mt.seplag.gestao_servidores.mapper.CidadeMapper;
 import gov.mt.seplag.gestao_servidores.mapper.EnderecoMapper;
 import gov.mt.seplag.gestao_servidores.mapper.UnidadeMapper;
 import gov.mt.seplag.gestao_servidores.repository.UnidadeRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -71,16 +72,21 @@ public class UnidadeService {
         return unidadeMapper.toUnidadeResponseDTO(savedUnidade);
     }
 
+    @Transactional
     public UnidadeResponseDTO updateUnidade(Long id, UnidadeRequestDTO unidadeRequestDTO) {
         log.info("Atualizando unidade com ID: {} - {}", id, unidadeRequestDTO);
 
         Unidade existingUnidade = unidadeRepository.findById(id)
                 .orElseThrow(() -> new UnidadeNotFoundException(id));
 
-        List<Endereco> enderecos = new ArrayList<>();
         for (Endereco endereco : existingUnidade.getEnderecos()) {
-            Endereco existingEndereco = enderecoService.updateEndereco(endereco.getId(), endereco);
-            enderecos.add(existingEndereco);
+            enderecoService.deleteEndereco(endereco.getId());
+        }
+
+        List<Endereco> enderecos = new ArrayList<>();
+        for (EnderecoRequestDTO enderecoDTO : unidadeRequestDTO.getEnderecos()) {
+            Endereco endereco = enderecoService.createEndereco(enderecoDTO);
+            enderecos.add(endereco);
         }
         existingUnidade.setEnderecos(enderecos);
 

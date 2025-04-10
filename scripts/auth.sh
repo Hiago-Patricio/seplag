@@ -16,4 +16,4 @@ curl -X 'POST' \
   -d '{
   "username": "joao_das_neves",
   "password": "12345678"
-}' | jq
+}' | jq -r '.accessToken'

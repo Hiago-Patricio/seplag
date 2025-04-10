@@ -12,9 +12,8 @@ public interface ServidorEfetivoMapper {
     @Mapping(source = "pessoa", target = "pessoa")
     ServidorEfetivoResponseDTO toServidorEfetivoResponseDTO(ServidorEfetivo servidorEfetivo);
 
-
     @Mapping(target = "pessoa", source = "pessoa")
-    ServidorEfetivo toServidorEfetivoEntity(ServidorEfetivoRequestDTO servidorEfetivoRequestDTO, Pessoa pessoa);
+    ServidorEfetivo toServidorEfetivoEntity(ServidorEfetivoRequestDTO servidorEfetivoRequestDTO);
 
     @Mapping(target = "pessoa", source = "pessoa")
     void updateServidorEfetivoFromDTO(ServidorEfetivoRequestDTO servidorEfetivoRequestDTO, @MappingTarget ServidorEfetivo servidorEfetivo, Pessoa pessoa);

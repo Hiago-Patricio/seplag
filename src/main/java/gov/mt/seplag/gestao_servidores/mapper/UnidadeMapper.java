@@ -13,6 +13,8 @@ public interface UnidadeMapper {
     @Mapping(target = "id", ignore = true)
     Unidade toUnidadeEntity(UnidadeRequestDTO unidadeRequestDTO);
 
+    Unidade toUnidadeEntity(UnidadeResponseDTO unidadeRequestDTO);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target= "lotacoes", ignore = true)
     @Mapping(target= "enderecos", ignore = true)

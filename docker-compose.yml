@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     container_name: postgres-db
     restart: always
-    env_file: .env.example
+    env_file: .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -16,7 +16,7 @@ services:
   minio:
     image: minio/minio:latest
     container_name: minio
-    env_file: .env.example
+    env_file: .env
     ports:
       - "${MINIO_API_PORT}:${MINIO_API_PORT}"
       - "${MINIO_CONSOLE_PORT}:${MINIO_CONSOLE_PORT}"
@@ -36,7 +36,7 @@ services:
     depends_on:
       - postgres
       - minio
-    env_file: .env.example
+    env_file: .env
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}

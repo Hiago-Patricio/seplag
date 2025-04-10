@@ -9,6 +9,7 @@ import gov.mt.seplag.gestao_servidores.exception.pessoa.PessoaNotFoundException;
 import gov.mt.seplag.gestao_servidores.mapper.EnderecoMapper;
 import gov.mt.seplag.gestao_servidores.mapper.PessoaMapper;
 import gov.mt.seplag.gestao_servidores.repository.PessoaRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -37,6 +38,12 @@ public class PessoaService {
 
         log.debug("{} pessoas localizadas.", page.getTotalElements());
         return dtoPage;
+    }
+
+    public List<Pessoa> findPessoasByNome(String nome) {
+        log.info("Buscando pessoa com nome: {}", nome);
+
+        return pessoaRepository.findByNomeContainingIgnoreCase(nome);
     }
 
     public Pessoa findPessoaById(Long id) {
@@ -68,18 +75,23 @@ public class PessoaService {
         return savedPessoa;
     }
 
+    @Transactional
     public Pessoa updatePessoa(Long id, PessoaRequestDTO pessoaRequestDTO) {
         log.info("Atualizando pessoa com ID: {} - {}", id, pessoaRequestDTO);
 
         Pessoa existingPessoa = pessoaRepository.findById(id)
                 .orElseThrow(() -> new PessoaNotFoundException(id));
 
-        List<Endereco> enderecos = new ArrayList<>();
         for (Endereco endereco : existingPessoa.getEnderecos()) {
-            Endereco updatedEndereco = enderecoService.updateEndereco(endereco.getId(), endereco);
-            enderecos.add(updatedEndereco);
+            enderecoService.deleteEndereco(endereco.getId());
         }
-        existingPessoa.setEnderecos(enderecos);
+
+        List<Endereco> novosEnderecos = new ArrayList<>();
+        for (EnderecoRequestDTO enderecoDTO : pessoaRequestDTO.getEnderecos()) {
+            Endereco novoEndereco = enderecoService.createEndereco(enderecoDTO);
+            novosEnderecos.add(novoEndereco);
+        }
+        existingPessoa.setEnderecos(novosEnderecos);
 
         pessoaMapper.updatePessoaFromDTO(pessoaRequestDTO, existingPessoa);
 

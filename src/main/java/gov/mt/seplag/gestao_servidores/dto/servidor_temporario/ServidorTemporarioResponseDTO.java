@@ -1,10 +1,12 @@
 package gov.mt.seplag.gestao_servidores.dto.servidor_temporario;
 
+import gov.mt.seplag.gestao_servidores.dto.lotacao.LotacaoResponseDTO;
 import gov.mt.seplag.gestao_servidores.entity.Pessoa;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class ServidorTemporarioResponseDTO {
@@ -17,4 +19,6 @@ public class ServidorTemporarioResponseDTO {
 
     @Schema(example = "2023-09-01", description = "Data de demissão do servidor temporário")
     private Date dataDemissao;
+
+    private List<LotacaoResponseDTO> lotacoes;
 }
